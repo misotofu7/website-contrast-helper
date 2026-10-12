@@ -6,6 +6,9 @@
   "action": {
     "default_title": "Contrast Assistant"
   },
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
       "matches": [

@@ -17,7 +17,7 @@ Contrast Assistant is a Chrome extension prototype that detects potentially diff
 - Notifies users through a small pop-up when potential contrast issues are found and specifies how many
 - Allows users to improve the contrast of detected text by applying either black or white, depending on which provides a higher contrast ratio
 - Allows users to restore the original text colors through a toggle button
-- Gives users the option to ignore or dismiss the notification without making changes
+- Gives users the option to hide the notification without making changes
 
 ## How It Works
 
@@ -35,7 +35,7 @@ Contrast Assistant is a Chrome extension prototype that detects potentially diff
 6. The calculated ratio is compared against the WCAG minimum threshold of 4.5:1 for normal text.
 7. If the contrast falls below the threshold, the element is marked as a potential contrast issue.
 8. If issues are found, the user receives a small notification at the top right corner of the webpage.
-9. The user may choose to improve the contrast or ignore the suggestion.
+9. The user may choose to improve the contrast or hide the suggestion.
 10. If the user chooses to improve the contrast, the extension applies either black or white text, depending on which provides better contrast against the background.
 11. The user may restore the original text colors by toggling off the improvement.
 
@@ -47,6 +47,7 @@ The main files are:
 
 - `manifest.json` — Defines the extension's configuration and allows the content script to run automatically on supported webpages.
 - `content.js` — Contains the main logic for detecting low-contrast text, calculating contrast ratios, displaying notifications, and applying or reversing changes.
+- `background.js` — Listens for clicks on the Chrome extension icon and sends a message to content.js to reopen the hidden notification.
 - HTML testing page — Contains sample text elements with known foreground and background color combinations to test the prototype.
 
 JavaScript interacts with the webpage through the DOM (Document Object Model). The `getComputedStyle()` method is used to retrieve resolved CSS values for text and background colors.
@@ -79,7 +80,8 @@ The test cases include:
 - Low-contrast button text → Detect low contrast
 - Clicking Improve Contrast → Apply a higher-contrast text color
 - Clicking Restore Original → Restore the original inline styling
-- Clicking Ignore → Dismiss the notification without applying changes
+- Clicking hide → Hide the notification
+- Clicking extension icon → Popup reappears
 
 ## Prototype Scope and Limitations
 

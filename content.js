@@ -1,6 +1,22 @@
 // Immediately Invoked Function Expression (IIFE)
 // prevent the variables from conflicting with webpage's variables by doing this
 (() => {
+    // listen for a request to show the hidden popup
+    chrome.runtime.onMessage.addListener((message) => {
+        // check if the message action is to show the contrast assistant panel
+        if (message.action === "showPanel") {
+            // locate the existing contrast assistant panel in the DOM
+            const panel = document.getElementById(
+                "contrast-assistant-panel"
+            );
+
+            // if the panel exists, display it again
+            if (panel) {
+                panel.style.display = "block";
+            }
+        }
+    });
+
     // remove an old notification if the extension is run again
     document.getElementById("contrast-assistant-panel")?.remove();
 
@@ -302,23 +318,23 @@
             panel.appendChild(toggleButton);
         }
 
-        // create a button to close the panel without making changes
-        const closeButton = document.createElement("button");
-        closeButton.textContent = "Ignore";
+        // Create a button to temporarily hide the popup
+        const hideButton = document.createElement("button");
+        hideButton.textContent = "Hide";
 
-        closeButton.addEventListener("click", () => {
-            panel.remove();
+        // Hide the popup without removing it from the webpage
+        hideButton.addEventListener("click", () => {
+            panel.style.display = "none";
         });
 
-        // apply consistent styling to the close button
-        styleButton(closeButton);
-        // add some spacing between the toggle and close buttons
-        closeButton.style.marginLeft = "8px";
+        // Apply the same styling as the other button
+        styleButton(hideButton);
+        hideButton.style.marginLeft = "8px";
 
-        // append the close button to the panel
-        panel.appendChild(closeButton);
+        // Add the Hide button to the popup
+        panel.appendChild(hideButton);
 
-        // append the panel to the body of the document so it becomes visible
+        // Display the popup on the webpage
         document.body.appendChild(panel);
     }
 
