@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contrast Assistant Test Page</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: white;
+        }
+
+        .good {
+            color: #222222;
+            background: #ffffff;
+            padding: 15px;
+        }
+
+        .bad-light {
+            color: #bbbbbb;
+            background: #ffffff;
+            padding: 15px;
+        }
+
+        .bad-dark {
+            color: #555555;
+            background: #111111;
+            padding: 15px;
+        }
+
+        .bad-link {
+            color: #9aadc0;
+            background: #ffffff;
+        }
+
+        .bad-button {
+            color: #aaaaaa;
+            background: #eeeeee;
+            padding: 12px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- test cases specified in the google doc -->
+    <h1>Contrast Assistant Test Page</h1>
+
+    <p class="good">
+        This text should already have good contrast.
+    </p>
+
+    <p class="bad-light">
+        This light gray text should be detected.
+    </p>
+
+    <p class="bad-dark">
+        This dark gray text on a dark background should be detected.
+    </p>
+
+    <p>
+        <a class="bad-link" href="#">
+        This low-contrast link should be detected.
+        </a>
+    </p>
+
+    <button class="bad-button">
+        Low-contrast button
+    </button>
+
+</body>
+</html>
